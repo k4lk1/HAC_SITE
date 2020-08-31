@@ -1,0 +1,122 @@
+{% extends "base_site.html" %}
+{% load static %}
+
+{% block title %} Register {% endblock title %}
+
+{% block stylesheets %}
+  {{ block.super }}
+  <!-- Animate.css -->
+  <link href="/static/vendors/animate.css/animate.min.css" rel="stylesheet">  
+{% endblock stylesheets %}
+
+{% block body_class %}login{% endblock body_class %}
+
+{% block body %}
+  <div>    
+      {% if form.errors %}
+        <div class="alert alert-danger alert-dismissible fade in center-margin col-lg-4 col-md-4 col-sm-12 col-xs-12 text-center" role="alert" style="margin-top:10px;">
+          {% comment %} <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+          </button> {% endcomment %}
+        {% for field in form %}
+            {% for error in field.errors %}
+            <p>{{ error|escape }}</p>
+            {% endfor %}
+        {% endfor %}
+        
+        {% for error in form.non_field_errors %}
+            <p>{{ error|escape }}</p>
+        {% endfor %}
+
+        </div>      
+      {% endif %}
+
+    <div class="login_wrapper">
+      <!--<div class="animate form login_form">
+        <section class="login_content">
+          <form action="{% url 'login' %}" method="POST">
+          {% csrf_token %}
+            <h1>Login</h1>
+            <div>
+            {{ login_form.username }}
+              {% comment %} <input name="username" id="id_username" type="text" class="form-control" placeholder="Username" required="" /> {% endcomment %}
+            </div>
+            <div>
+            {{ login_form.password }}
+              {% comment %} <input type="password" class="form-control" placeholder="Password" required="" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"/> {% endcomment %}
+            </div>
+            <div>
+              <input type="submit" class="btn btn-default submit" value="Log In" />
+              <a class="reset_pass" href="#">Lost your password?</a>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="separator">
+              <p class="change_link">New to site?
+                <a href="#signup" class="to_register"> Create Account </a>
+              </p>
+
+              <div class="clearfix"></div>
+              <br />
+
+              <div>
+                <h1><i class="fa fa-paw"></i> HAC Security!</h1>
+                <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
+              </div>
+            </div>
+          </form>
+        </section>
+      </div> -->
+
+      <div id="register" class="animate form">
+        <section class="login_content">
+          <form method="POST">
+          {% csrf_token %}
+            <h1>Create Account</h1>
+            <div>
+            {{ form.username }}
+              {% comment %} <input type="text" class="form-control" placeholder="Username" required="" /> {% endcomment %}
+            </div>
+            <div>
+            {{ form.email }}
+              {% comment %} <input type="email" class="form-control" placeholder="Email" required="" /> {% endcomment %}
+            </div>
+            <div>
+            {{ form.password1 }}
+              {% comment %} <input type="password" class="form-control" placeholder="Password" required="" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" /> {% endcomment %}
+            </div>
+            <div>
+            {{ form.password2 }}
+              {% comment %} <input type="password" class="form-control" placeholder="Password" required="" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" /> {% endcomment %}
+            </div>
+            <div>
+              <input type="submit" class="btn btn-default submit center" value="Sign Up" style="width: 100px;margin-left: calc(50% - 50px);">
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="separator">
+              <p class="change_link">Already a member ?
+                <a href="{% url 'login' %}" class="to_register"> Log in </a>
+              </p>
+
+              <div class="clearfix"></div>
+              <br />
+
+              <div>
+                <h1><i class="fa fa-paw"></i> HAC Security!</h1>
+                <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
+              </div>
+            </div>
+          </form>
+        </section>
+      </div>
+    </div>
+  </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="{% static 'register.js' %}"></script>
+
+
+{% endblock body %}

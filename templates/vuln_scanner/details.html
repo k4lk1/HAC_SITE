@@ -1,0 +1,88 @@
+{% extends "base_site.html" %} {% block title %} Scan Details {% endblock title %} {% comment %} {% block sidebar_class %}menu_fixed{% endblock sidebar_class %} {% endcomment %} {% block stylesheets %} {{ block.super }} {% endblock stylesheets %}
+{% block content %}
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">    
+            </div>
+
+            {% comment %}
+            <div class="title_right">
+                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search for...">
+                        <span class="input-group-btn">
+                <button class="btn btn-default" type="button">Go!</button>
+              </span>
+                    </div>
+                </div>
+            </div> {% endcomment %}
+        </div>
+
+
+                        <!-- start project-detail sidebar -->
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+
+                            <section class="panel">
+
+                                <div class="x_title">
+                                    <h2><b>Scan Information</b></h2>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="panel-body">
+                                    <p>Scans has been performed successfully</p><br />
+
+                                    <div class="project_detail">
+                                        <p class="title">Target Site:</p>
+                                        <p>{{object.site_url}}</p>
+                                        <p class="title">Scan Performed at:</p>
+                                        <p>{{object.date_posted}}</p>
+                                    </div>
+
+                                    <br />
+                                    <h5><b>Project files</b></h5>
+                                    {% for link in urls%}  
+                                    {% if link.id == object.id %}
+                                    <ul class="list-unstyled project_files">                                         
+                                        <li>
+                                             
+                                            <a href="{% url 'report' link.id  %}"> <i class="fa fa-file-pdf-o"></i> Report.pdf</a>
+                                        </li>   
+                                    </ul>
+                                    {%endif%}
+                                    {%endfor%}
+
+                                    <br />
+                                    <h5><b>Scan Logs</b></h5>
+                                    
+                                    <ul class="list-unstyled project_files">
+                                        <li><a href="{%url 'idor' object.id %}"><i class="fa fa-file-word-o"></i> IDOR:{{idor_status}}</a>
+                                        </li>
+                                         
+                                        <li><a href="{%url 'sqli' object.id %}"><i class="fa fa-file-word-o"></i> SQLI:{{ sqli_status }}</a>
+                                        </li>
+                                        
+                                        <li><a href="{%url 'xss' object.id %}"><i class="fa fa-file-word-o"></i>XSS:{{xss_status}}</a>
+                                        </li>
+                                        <li><a href="{%url 'lfi' object.id %}"><i class="fa fa-file-word-o"></i> LFI:{{lfi_status}}</a>
+                                        </li>
+                                    </ul>
+                                 
+                                    <br />
+                                 
+                                    <br />
+                                </div>
+                            </section>
+                        </div>
+                        <!-- end project-detail sidebar -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %} {% block javascripts %} {{ block.super }}
+<!-- ECharts -->
+<script src="/static/vendors/echarts/dist/echarts.min.js"></script>
+{% endblock javascripts %}

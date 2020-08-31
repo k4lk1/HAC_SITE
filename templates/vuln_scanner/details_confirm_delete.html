@@ -1,0 +1,39 @@
+{% extends "base_site.html" %} {% block title %} Scan Details {% endblock title %} {% comment %} {% block sidebar_class %}menu_fixed{% endblock sidebar_class %} {% endcomment %} {% block stylesheets %} {{ block.super }} {% endblock stylesheets %}
+{% block content %}
+<!--<div class="">
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Delete Report</legend>
+            <h2>Are you sure you want to delete "{{ object.site_url }}" report?</h2>
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-danger" type="submit">Yes, Delete</button>
+            <a class="btn btn-outline-secondary" href="{% url 'details' object.id %}">Cancel</a>
+        </div>
+    </form>
+</div>-->
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <h1>Delete Report</h1>
+            <div class="title_left">
+                <h3>Are you sure to delete the following report?</h3>
+               <h2> <small> {{ object.site_url }}</small></h2>
+            </div>
+            <div>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <button class="btn btn-outline-danger" type="submit">Yes, Delete</button>
+                    <a class="btn btn-outline-secondary" href="{% url 'details' object.id %}">Cancel</a>
+                </div>
+            </form>
+        </div>
+        </div>
+    </div>
+</div>
+{% endblock content %} {% block javascripts %} {{ block.super }}
+<!-- ECharts -->
+<script src="/static/vendors/echarts/dist/echarts.min.js"></script>
+{% endblock javascripts %}

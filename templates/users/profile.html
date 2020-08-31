@@ -1,0 +1,92 @@
+{% extends "base_site.html" %}
+{% load user_extras %}
+{% block title %} Profile {% endblock title %}
+
+{% block stylesheets %}
+  {{ block.super }}
+{% endblock stylesheets %}
+
+{% block content %}
+  <div class="right_col" role="main">
+    <div class="">
+      <div class="page-title">
+        <div class="title_left">
+          <h3>User Profile</h3>
+        </div>
+      </div>
+
+      <div class="clearfix"></div>
+
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>User Details</h2>              
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
+                <div class="profile_img">
+                  <div id="crop-avatar">
+                    <!-- Current avatar -->
+                    <img class="img-responsive avatar-view" src="{{user.profile.image.url}}" alt="Avatar" title="Change the avatar">
+                  </div>
+                </div>
+                <h3>{{ user.username | capfirst }}'s Profile</h3>
+
+              
+                <br />
+              </div>
+              <div class="col-md-9 col-sm-9 col-xs-12">
+
+                <div class="profile_title">
+                  <div class="col-md-6">
+                    <h2>User Profile Data</h2>
+                  </div>
+                </div>  
+                
+                <br />
+                <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Username <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">                      
+                      {{ u_form.username }}
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Email <span class="required">*</span>                    
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">                      
+                      {{ u_form.email }}
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Profile Picture</label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">                      
+                      {{ p_form.image }}
+                    </div>
+                  </div>                  
+                  <div class="ln_solid"></div>
+                  <div class="form-group">
+                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">                      
+                      <button type="submit" class="btn btn-success">Submit</button>
+                    </div>
+                  </div>
+                </form>                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+  {{ block.super }}
+  <!-- morris.js -->
+  <script src="/static/vendors/raphael/raphael.min.js"></script>
+  <script src="/static/vendors/morris.js/morris.min.js"></script>
+{% endblock javascripts %}
